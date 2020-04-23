@@ -59,7 +59,7 @@ export default {
   },
   computed: {
   },
-  data () {
+  data() {
     return {
       // banner数据
       swiperInfo: {
@@ -79,88 +79,88 @@ export default {
       PdList: []
     }
   },
-  onLoad () {
+  onLoad() {
   },
-  created () {
+  created() {
     this.getProductCategory()
     this.getBanner()
   },
-  onPageScroll ( e ) {
-    this.$refs.barTabNav._selectedTab( e.scrollTop )
+  onPageScroll(e) {
+    this.$refs.barTabNav._selectedTab(e.scrollTop)
   },
   methods: {
-    setImageHeight ( data ) {
+    setImageHeight(data) {
       let that = this
       let windowWidth
-      uni.getSystemInfo( {
-        success: function ( res ) {
+      uni.getSystemInfo({
+        success: function (res) {
           windowWidth = res.windowWidth
-          uni.getImageInfo( {
+          uni.getImageInfo({
             src: data,
-            success: function ( image ) {
+            success: function (image) {
               that.swiperInfo.height = windowWidth * image.height / image.width
             }
-          } )
+          })
         }
-      } )
+      })
     },
     // 商品分类 and 对应商品数据
-    getProductCategory () {
-      this.$request.get( API.productCategory + '?needProduct=true' ).then( res => {
-        console.log( '商品分类', res.data )
+    getProductCategory() {
+      this.$request.get(API.productCategory + '?needProduct=true').then(res => {
+        console.log('商品分类', res.data)
         this.navInfo.navList = res.data.data
-        this.navInfo.productList = res.data.data[ this.navInfo.navIndex ].productList
+        this.navInfo.productList = res.data.data[this.navInfo.navIndex].productList
         this.changeSwiperHeight()
-      } )
+      })
     },
-    changeSwiperHeight () {
-      this.navInfo.navList[ this.navInfo.navIndex ].productList.length == 0 || this.navInfo.navList[ this.navInfo.navIndex ].productList.length < 5 ? 4 * 130 : this.swiperHeight = this.navInfo.navList[ this.navInfo.navIndex ].productList.length * 130
+    changeSwiperHeight() {
+      this.navInfo.navList[this.navInfo.navIndex].productList.length == 0 || this.navInfo.navList[this.navInfo.navIndex].productList.length < 5 ? 4 * 130 : this.swiperHeight = this.navInfo.navList[this.navInfo.navIndex].productList.length * 130
     },
-    navListClick ( idx, val ) {
+    navListClick(idx, val) {
       this.navInfo.navIndex = idx
-      this.navInfo.productList = this.navInfo.navList[ this.navInfo.navIndex ].productList
+      this.navInfo.productList = this.navInfo.navList[this.navInfo.navIndex].productList
       this.changeSwiperHeight()
     },
     // 滚动切换标签样式
-    switchTab ( e ) {
+    switchTab(e) {
       this.navInfo.navIndex = e.detail.current
-      this.navInfo.productList = this.navInfo.navList[ e.detail.current ].productList
+      this.navInfo.productList = this.navInfo.navList[e.detail.current].productList
       this.changeSwiperHeight()
     },
     // banner 
-    getBanner () {
-      this.$request.get( API.getBanner + "?applyTo=1" ).then( res => {
-        console.log( 'banner', res.data )
+    getBanner() {
+      this.$request.get(API.getBanner + "?applyTo=1").then(res => {
+        console.log('banner', res.data)
         var data = []
-        if ( res && res.code == 0 ) {
-          for ( let i in res.data.data ) {
-            if ( res.data.data[ i ].status == 1 ) {
-              data.push( res.data.data[ i ] )
+        if (res && res.code == 0) {
+          for (let i in res.data.data) {
+            if (res.data.data[i].status == 1) {
+              data.push(res.data.data[i])
             }
           }
           this.swiperInfo.imgUrls = data
-          this.setImageHeight( this.swiperInfo.imgUrls[ 0 ].img )
+          this.setImageHeight(this.swiperInfo.imgUrls[0].img)
         }
-      } )
+      })
     },
     // banner click
-    bannerJump ( data ) {
-      if ( data ) {
-        uni.navigateTo( {
+    bannerJump(data) {
+      if (data) {
+        uni.navigateTo({
           url: data.url
-        } )
+        })
       }
     },
     // banner change
-    bannerChange ( data ) {
-      console.log( 'banner change', data )
+    bannerChange(data) {
+      console.log('banner change', data)
       this.swiperInfo.height = data
     },
     // go details
-    goDetails ( id ) {
-      uni.navigateTo( {
+    goDetails(id) {
+      uni.navigateTo({
         url: "/pages/product-details/product-details?id=" + id
-      } )
+      })
     }
   }
 }

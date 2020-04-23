@@ -53,4 +53,8 @@ module.exports = {
   startActivity: "integrate_pruchase",
   //支付
   pay: "pay/pay",
+  // 卡券列表
+  coupon: 'coupon',
+  // 订单
+  order: 'order'
 }

@@ -31,7 +31,7 @@
 			}
 		},
 		{
-			"path": "pages/address-info/address-info",
+			"path": "pages/address/address-info",
 			"style": {
 				"navigationBarTitleText": ""
 			}
@@ -52,6 +52,42 @@
 			"path": "pages/group/group-join",
 			"style": {
 				"navigationBarTitleText": "拼团详情"
+			}
+		},
+		{
+			"path": "pages/member/member-info",
+			"style": {
+				"navigationBarTitleText": "个人资料"
+			}
+		},
+		{
+			"path": "pages/coupon/coupon-list",
+			"style": {
+				"navigationBarTitleText": "优惠券"
+			}
+		},
+		{
+			"path": "pages/coupon/coupon-detils",
+			"style": {
+				"navigationBarTitleText": "优惠券详情"
+			}
+		},
+		{
+			"path": "pages/order/order-list",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path": "pages/order/order-detils",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/conversation/conversation",
+			"style": {
+				"navigationBarTitleText": "导购对话"
 			}
 		}
 	],

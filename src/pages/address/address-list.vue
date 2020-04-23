@@ -1,7 +1,7 @@
 <template>
   <view
     class="pageInfo"
-    :style="'height:'+windowHeight+'px'"
+    :style="'min-height:'+windowHeight+'px'"
   >
     <checkbox-group @change="checkboxChange">
       <label
@@ -123,7 +123,7 @@ export default {
       } )
     },
     crateAddress ( id ) {
-      let url = id != 0 ? '/pages/address-info/address-info?id=' + id : '/pages/address-info/address-info'
+      let url = id != 0 ? '/pages/address/address-info?id=' + id : '/pages/address/address-info'
       uni.navigateTo( {
         url: url
       } )

@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import cmdIcon from "../cmd-icon/cmd-icon.vue"
-
 /**  
  * 底部导航栏组件
  * @description 底部导航栏固定在页面底部，模仿md风格。  
@@ -52,7 +50,7 @@ export default {
   name: 'cmd-bottom-nav',
 
   components: {
-    cmdIcon
+
   },
 
   props: {

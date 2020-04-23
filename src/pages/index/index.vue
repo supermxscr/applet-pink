@@ -6,6 +6,8 @@
     <shop v-if="tabbarInfo.tabbarCurrent == 0"></shop>
     <group v-if="tabbarInfo.tabbarCurrent ==1"></group>
     <explore v-if="tabbarInfo.tabbarCurrent ==2"></explore>
+    <conversation v-if="tabbarInfo.tabbarCurrent ==3"></conversation>
+    <member v-if="tabbarInfo.tabbarCurrent ==4"></member>
     <cmd-bottom-nav
       :current="tabbarInfo.tabbarCurrent"
       :list="tabbarInfo.tabbarListInfo"
@@ -20,21 +22,25 @@
 
 <script>
 import API from "@/api/config.js"
-import AppletAuth from "@/components/auth/applet-auth.vue"
+import appletAuth from "@/components/auth/applet-auth.vue"
 import cmdBottomNav from "@/components/cmd-bottom-nav/cmd-bottom-nav.vue"
 import shop from "@/components/pages/shop"
 import group from "@/components/pages/group"
 import explore from "@/components/pages/explore"
+import member from "@/components/pages/member-center"
+import conversation from "@/components/pages/im-list"
 import {
   mapState
 } from 'vuex'
 export default {
   components: {
-    AppletAuth,
+    appletAuth,
     cmdBottomNav,
     shop,
     group,
-    explore
+    explore,
+    member,
+    conversation
   },
   computed: {
     ...mapState( [ 'tabbarList' ] )
@@ -67,23 +73,34 @@ export default {
           "icon": "",
           "src": "../../static/icon/home.png",
           "srcSelect": "../../static/icon/home-c.png"
+        }, {
+          "pagePath": "/pages/",
+          "text": "消息",
+          "icon": "",
+          "src": "../../static/icon/home.png",
+          "srcSelect": "../../static/icon/home-c.png"
+        }, {
+          "pagePath": "/pages/",
+          "text": "我的",
+          "icon": "",
+          "src": "../../static/icon/home.png",
+          "srcSelect": "../../static/icon/home-c.png"
         } ]
-      },
-
+      }
     }
   },
   onLoad ( option ) {
-    console.log( 'indedx-----', option )
-    if ( option ) {
-      this.tabbarInfo.tabbarCurrent = option.pageFlag
-    }
+    this.tabbarInfo.tabbarCurrent = option.pageFlag ? option.pageFlag : 3
     this.setNavigationBar()
     this.getTabberListIinfo()
+  },
+  created () {
+    this.tabbarInfo.tabbarCurrent = 3
   },
   methods: {
     setNavigationBar () {
       uni.setNavigationBarTitle( {
-        title: this.tabbarInfo.tabbarListInfo[ 0 ].text
+        title: this.tabbarInfo.tabbarListInfo[ this.tabbarInfo.tabbarCurrent ].text
       } )
       uni.setNavigationBarColor( {
         frontColor: '#ffffff',
